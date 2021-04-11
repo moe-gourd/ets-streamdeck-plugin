@@ -30,3 +30,14 @@
 *.exe
 *.out
 *.app
+
+# Visual Studio Extensions
+**/.vs/
+*.user
+
+# Target directories
+**/x64/
+**/x86/
+
+# other
+*.bak
