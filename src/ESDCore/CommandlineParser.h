@@ -10,6 +10,9 @@ private:
 	std::string mRegisterEvent;
 	std::string mInfo;
 
+	void parseArgumentList(int argc, const char* const argv[]);
+	void parseArgument(int argumentId, const char* const argv[]);
+
 public:
 	CommandlineParser(int argc, const char* const argv[]);
 
