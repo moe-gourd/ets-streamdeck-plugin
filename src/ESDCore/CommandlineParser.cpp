@@ -6,7 +6,15 @@ CommandlineParser::CommandlineParser(int argc, const char* const argv[])
 }
 
 bool CommandlineParser::isValid() {
-	return false;
+	bool isPortValid = (mPort != 0);
+	bool isPluginUUIDValid = !mPluginUUID.empty();
+	bool isRegisterEventValid = !mRegisterEvent.empty();
+	bool isInfoValid = !mInfo.empty();
+
+	return isPortValid
+		&& isPluginUUIDValid
+		&& isRegisterEventValid
+		&& isInfoValid;
 }
 
 int CommandlineParser::port()
