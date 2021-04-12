@@ -18,7 +18,7 @@
     <ClInclude Include="framework.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="CommandlineParser.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
@@ -26,7 +26,7 @@
     <ClCompile Include="ESDCore.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="CommandlineParser.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
