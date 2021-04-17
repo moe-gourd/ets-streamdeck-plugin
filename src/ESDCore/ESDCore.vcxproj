@@ -167,12 +167,14 @@
     <ClInclude Include="ConnectionManager.h" />
     <ClInclude Include="JSONUtils.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="WebsocketConnection.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommandlineParser.cpp" />
     <ClCompile Include="ConnectionManager.cpp" />
     <ClCompile Include="JSONUtils.cpp" />
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="WebsocketConnection.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
