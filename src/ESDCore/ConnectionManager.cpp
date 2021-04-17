@@ -1,5 +1,7 @@
 #include "pch.h"
+
 #include "ConnectionManager.h"
+#include "JSONUtils.h"
 
 ConnectionManager::ConnectionManager(int argc, const char* const argv[])
 {
@@ -7,14 +9,48 @@ ConnectionManager::ConnectionManager(int argc, const char* const argv[])
 }
 
 void ConnectionManager::OnOpen(WebsocketClient* inClient, websocketpp::connection_hdl inConnectionHandler)
-{}
+{
+	DebugPrint("OnOpen");
+
+	json jsonObject;
+	jsonObject["event"] = commandlineParser->registerEvent();
+	jsonObject["uuid"] = commandlineParser->pluginUUID();
+
+	websocketpp::lib::error_code errorCode;
+	webSocketClient.send(connectionHandle, jsonObject.dump(), websocketpp::frame::opcode::text, errorCode);
+}
+
 
 void ConnectionManager::OnFail(WebsocketClient* inClient, websocketpp::connection_hdl inConnectionHandler)
 {
+	std::string reason;
+
+	if (nullptr == inClient)
+	{
+		WebsocketClient::connection_ptr connection = inClient->get_con_from_hdl(inConnectionHandler);
+		if (connection != NULL)
+		{
+			reason = connection->get_ec().message();
+		}
+	}
+
+	DebugPrint("Failed with reason: %s\n", reason.c_str());
 }
 
 void ConnectionManager::OnClose(WebsocketClient* inClient, websocketpp::connection_hdl inConnectionHandler)
 {
+	std::string reason;
+
+	if (inClient != nullptr)
+	{
+		WebsocketClient::connection_ptr connection = inClient->get_con_from_hdl(inConnectionHandler);
+		if (connection != NULL)
+		{
+			reason = connection->get_remote_close_reason();
+		}
+	}
+
+	DebugPrint("Close with reason: %s\n", reason.c_str());
 }
 
 void ConnectionManager::OnMessage(websocketpp::connection_hdl, WebsocketClient::message_ptr inMsg)
