@@ -15,18 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
+    <ClInclude Include="CommandlineParser.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="CommandlineParser.h">
+    <ClInclude Include="ConnectionManager.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ESDCore.cpp">
+    <ClCompile Include="CommandlineParser.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="CommandlineParser.cpp">
+    <ClCompile Include="ConnectionManager.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

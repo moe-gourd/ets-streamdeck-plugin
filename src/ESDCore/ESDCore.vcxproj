@@ -165,10 +165,13 @@
   <ItemGroup>
     <ClInclude Include="CommandlineParser.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="ConnectionManager.h" />
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommandlineParser.cpp" />
     <ClCompile Include="ESDCore.cpp" />
+    <ClCompile Include="ConnectionManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
