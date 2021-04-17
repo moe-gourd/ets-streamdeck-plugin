@@ -1,0 +1,38 @@
+{
+  "Actions": [
+    {
+      "Icon": "images/telemetryIcon", 
+      "Name": "Telemetry", 
+      "States": [
+        {
+          "Image": "images/telemetryImage",
+          "TitleAlignment": "middle", 
+          "FontSize": "10"
+        }
+      ], 
+      "SupportedInMultiActions": false,
+      "Tooltip": "Displays telemetry informatiojn", 
+      "UUID": "de.hogs.ets2.telemetry"
+    }
+  ], 
+  "Author": "Martin Kasper", 
+  "Description": "Displays Euro Truck Simulator 2 / American Truck Simulator 2 telemetry information", 
+  "Name": "ETS2",
+  "Version": "0.1",
+  "URL": "https://github.com/moe-gourd/ets-streamdeck-plugin",   
+  "Icon": "images/pluginIcon", 
+  "Category": "ETS2",
+  "CategoryIcon": "images/categoryIcon",
+  "CodePath": "ETS2Plugin", 
+  "SDKVersion": 2, 
+  "OS": [
+    {
+        "Platform": "windows", 
+        "MinimumVersion" : "10"
+    }
+  ],
+  "Software": 
+    {
+        "MinimumVersion" : "4.1"
+    }
+}
