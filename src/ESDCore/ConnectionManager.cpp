@@ -79,7 +79,7 @@ void ConnectionManager::connect()
 		WebsocketClient::connection_ptr connection = webSocketClient.get_connection(uri, ec);
 		if (ec)
 		{
-			// DebugPrint("Connect initialization error: %s\n", ec.message().c_str());
+			DebugPrint("Connect initialization error: %s\n", ec.message().c_str());
 			return;
 		}
 
@@ -94,8 +94,9 @@ void ConnectionManager::connect()
 		// will exit when this connection is closed.
 		webSocketClient.run();
 	}
-	catch (websocketpp::exception const&)
+	catch (websocketpp::exception const& e)
 	{
-		// TODO
+		const char *reason = e.what();
+		DebugPrint("Websocket threw an exception: %s\n", reason);
 	}
 }
