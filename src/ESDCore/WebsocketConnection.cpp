@@ -2,7 +2,7 @@
 #include "WebsocketConnection.h"
 #include "JSONUtils.h"
 
-WebsocketConnection::WebsocketConnection(std::string registerEvent, std::string pluginUUID)
+WebsocketConnection::WebsocketConnection(ConnectionManager* connectionManager):connectionManager(connectionManager)
 {
 }
 
@@ -52,6 +52,12 @@ void WebsocketConnection::OnClose(WebsocketClient* inClient, websocketpp::connec
 
 void WebsocketConnection::OnMessage(websocketpp::connection_hdl, WebsocketClient::message_ptr inMsg)
 {
+}
+
+void WebsocketConnection::init(std::string registerEvent, std::string pluginUUID)
+{
+	this->registerEvent = registerEvent;
+	this->pluginUUID = pluginUUID;
 }
 
 void WebsocketConnection::connect(int port)

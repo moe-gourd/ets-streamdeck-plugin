@@ -8,6 +8,7 @@ ConnectionManager::ConnectionManager(int argc, const char* const argv[])
 {
 	CommandlineParser commandlineParser(argc, argv);
 
-	websocketConnection = new WebsocketConnection(commandlineParser.registerEvent(), commandlineParser.pluginUUID());
+	websocketConnection = new WebsocketConnection(this);
+	websocketConnection->init(commandlineParser.registerEvent(), commandlineParser.pluginUUID());
 	websocketConnection->connect(commandlineParser.port());
 }
