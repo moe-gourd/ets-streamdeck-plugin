@@ -52,6 +52,11 @@ void WebsocketConnection::OnClose(WebsocketClient* inClient, websocketpp::connec
 
 void WebsocketConnection::OnMessage(websocketpp::connection_hdl, WebsocketClient::message_ptr inMsg)
 {
+	if (inMsg != NULL && inMsg->get_opcode() == websocketpp::frame::opcode::text)
+	{
+		std::string message = inMsg->get_payload();
+		DebugPrint("OnMessage: %s\n", message.c_str());
+	}
 }
 
 void WebsocketConnection::init(std::string registerEvent, std::string pluginUUID)
