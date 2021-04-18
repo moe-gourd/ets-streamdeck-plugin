@@ -16,7 +16,7 @@ private:
 	WebsocketClient webSocketClient;
 	websocketpp::connection_hdl connectionHandle;
 
-	ConnectionManager* connectionManager;
+	ConnectionManager *connectionManager;
 	std::string registerEvent;
 	std::string pluginUUID;
 

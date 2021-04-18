@@ -1,5 +1,6 @@
 #pragma once
 
+#include <windows.h>
 #include "CommandlineParser.h"
 
 class WebsocketConnection;
@@ -10,5 +11,7 @@ private:
 	WebsocketConnection* websocketConnection;
 public:
 	ConnectionManager(int argc, const char* const argv[]);
+
+	void OnMessage(std::string message);
 };
 
