@@ -8,7 +8,54 @@ ReceivedEvent * ReceivedEvent::fromMessage(std::string message)
 
 	std::string event = JSONUtils::getStringByName(jsonMessage, "event");
 
-	// define subtype by event
+	if ("didReceiveSettings" == event) {
+		return new DidReceiveSettingsEvent(event, jsonMessage);
+	}
+	else if ("didReceiveGlobalSettings" == event) {
+		return new DidReceiveGlobalSettingsEvent(event, jsonMessage);
+	}
+	else if ("keyDown" == event) {
+		return new KeyDownEvent(event, jsonMessage);
+	}
+	else if ("keyUp" == event) {
+		return new KeyUpEvent(event, jsonMessage);
+	}
+	else if ("willAppear" == event) {
+		return new WillAppearEvent(event, jsonMessage);
+	}
+	else if ("willDisappear" == event) {
+		return new WillDisappearEvent(event, jsonMessage);
+	}
+	else if ("titleParametersDidChange" == event) {
+		return new TitleParametersDidChangeEvent(event, jsonMessage);
+	}
+	else if ("deviceDidConnect" == event) {
+		return new DeviceDidConnectEvent(event, jsonMessage);
+	}
+	else if ("deviceDidDisconnect" == event) {
+		return new DeviceDidDisconnectEvent(event, jsonMessage);
+	}
+	else if ("applicationDidLaunch" == event) {
+		return new ApplicationDidLaunchEvent(event, jsonMessage);
+	}
+	else if ("applicationDidTerminate" == event) {
+		return new ApplicationDidTerminateEvent(event, jsonMessage);
+	}
+	else if ("systemDidWakeUp" == event) {
+		return new SystemDidWakeUpEvent(event, jsonMessage);
+	}
+	else if ("propertyInspectorDidAppear" == event) {
+		return new PropertyInspectorDidAppearEvent(event, jsonMessage);
+	}
+	else if ("propertyInspectorDidDisappear" == event) {
+		return new PropertyInspectorDidDisappearEvent(event, jsonMessage);
+	}
+	else if ("sendToPlugin" == event) {
+		return new SendToPluginEvent(event, jsonMessage);
+	}
+	else if ("sendToPropertyInspector" == event) {
+		return new SendToPropertyInspectorEvent(event, jsonMessage);
+	}
 
 	return new ReceivedEvent(event, jsonMessage);
 }
