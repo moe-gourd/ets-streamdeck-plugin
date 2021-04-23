@@ -58,17 +58,18 @@ void WebsocketConnection::OnMessage(websocketpp::connection_hdl, WebsocketClient
 		std::string message = inMsg->get_payload();
 		DebugPrint("OnMessage: %s\n", message.c_str());
 
-		connectionManager->OnMessage(message);
+		connectionManager->onMessage(message);
 	}
 }
 
-void WebsocketConnection::init(std::string registerEvent, std::string pluginUUID)
+void WebsocketConnection::init(std::string registerEvent, std::string pluginUUID, int port)
 {
 	this->registerEvent = registerEvent;
 	this->pluginUUID = pluginUUID;
+	this->port = port;
 }
 
-void WebsocketConnection::connect(int port)
+void WebsocketConnection::connect()
 {
 	try
 	{

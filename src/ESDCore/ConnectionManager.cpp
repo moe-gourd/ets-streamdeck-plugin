@@ -10,11 +10,10 @@ ConnectionManager::ConnectionManager(int argc, const char* const argv[])
 	CommandlineParser commandlineParser(argc, argv);
 
 	websocketConnection = new WebsocketConnection(this);
-	websocketConnection->init(commandlineParser.registerEvent(), commandlineParser.pluginUUID());
-	websocketConnection->connect(commandlineParser.port());
+	websocketConnection->init(commandlineParser.registerEvent(), commandlineParser.pluginUUID(), commandlineParser.port());
 }
 
-void ConnectionManager::OnMessage(std::string message)
+void ConnectionManager::onMessage(std::string message)
 {
 	ReceivedEvent *event = ReceivedEvent::fromMessage(message);
 	for (std::vector<Plugin*>::iterator it = pluginVector.begin(); it != pluginVector.end(); ++it) {
@@ -27,4 +26,9 @@ void ConnectionManager::addPlugin(Plugin* plugin)
 {
 	plugin->setConnectionManager(this);
 	pluginVector.push_back(plugin);
+}
+
+void ConnectionManager::run()
+{
+	websocketConnection->connect();
 }

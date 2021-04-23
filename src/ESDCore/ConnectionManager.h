@@ -16,8 +16,8 @@ private:
 public:
 	ConnectionManager(int argc, const char* const argv[]);
 
-	void OnMessage(std::string message);
-
+	void onMessage(std::string message);
 	void addPlugin(Plugin* plugin);
+	void run();
 };
 

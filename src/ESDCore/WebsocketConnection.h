@@ -19,6 +19,7 @@ private:
 	ConnectionManager *connectionManager;
 	std::string registerEvent;
 	std::string pluginUUID;
+	int port;
 
 	// Websocket callbacks
 	void OnOpen(WebsocketClient* inClient, websocketpp::connection_hdl inConnectionHandler);
@@ -29,7 +30,7 @@ private:
 public:
 	WebsocketConnection(ConnectionManager* connectionManager);
 
-	void init(std::string registerEvent, std::string pluginUUID);
-	void connect(int port);
+	void init(std::string registerEvent, std::string pluginUUID, int port);
+	void connect();
 };
 
