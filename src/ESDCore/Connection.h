@@ -13,5 +13,7 @@ public:
 	Connection(ConnectionManager* connectionManager);
 
 	void sendMessage(std::string message);
+
+	virtual void run(std::string &registerEvent, std::string &pluginUUID, int port) = 0;
 };
 

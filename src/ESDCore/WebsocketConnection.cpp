@@ -62,7 +62,7 @@ void WebsocketConnection::OnMessage(websocketpp::connection_hdl, WebsocketClient
 	}
 }
 
-void WebsocketConnection::run(std::string registerEvent, std::string pluginUUID, int port)
+void WebsocketConnection::run(std::string &registerEvent, std::string &pluginUUID, int port)
 {
 	this->registerEvent = registerEvent;
 	this->pluginUUID = pluginUUID;

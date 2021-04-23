@@ -29,6 +29,6 @@ private:
 public:
 	WebsocketConnection(ConnectionManager* connectionManager);
 
-	void run(std::string registerEvent, std::string pluginUUID, int port);
+	virtual void run(std::string &registerEvent, std::string &pluginUUID, int port) override;
 };
 
