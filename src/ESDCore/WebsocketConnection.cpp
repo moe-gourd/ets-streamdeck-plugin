@@ -62,15 +62,11 @@ void WebsocketConnection::OnMessage(websocketpp::connection_hdl, WebsocketClient
 	}
 }
 
-void WebsocketConnection::init(std::string registerEvent, std::string pluginUUID, int port)
+void WebsocketConnection::run(std::string registerEvent, std::string pluginUUID, int port)
 {
 	this->registerEvent = registerEvent;
 	this->pluginUUID = pluginUUID;
-	this->port = port;
-}
 
-void WebsocketConnection::connect()
-{
 	try
 	{
 		// Create the endpoint
