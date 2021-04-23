@@ -5,18 +5,17 @@
 #include <websocketpp/common/thread.hpp>
 #include <websocketpp/common/memory.hpp>
 
+#include "Connection.h"
+
 typedef websocketpp::config::asio_client::message_type::ptr message_ptr;
 typedef websocketpp::client<websocketpp::config::asio_client> WebsocketClient;
 
-class ConnectionManager;
-
-class WebsocketConnection
+class WebsocketConnection : Connection
 {
 private:
 	WebsocketClient webSocketClient;
 	websocketpp::connection_hdl connectionHandle;
 
-	ConnectionManager *connectionManager;
 	std::string registerEvent;
 	std::string pluginUUID;
 	int port;

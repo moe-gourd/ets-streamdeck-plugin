@@ -3,7 +3,7 @@
 #include "ConnectionManager.h"
 #include "JSONUtils.h"
 
-WebsocketConnection::WebsocketConnection(ConnectionManager* connectionManager):connectionManager(connectionManager)
+WebsocketConnection::WebsocketConnection(ConnectionManager* connectionManager):Connection(connectionManager)
 {
 }
 
@@ -58,7 +58,7 @@ void WebsocketConnection::OnMessage(websocketpp::connection_hdl, WebsocketClient
 		std::string message = inMsg->get_payload();
 		DebugPrint("OnMessage: %s\n", message.c_str());
 
-		connectionManager->onMessage(message);
+		sendMessage(message);
 	}
 }
 
