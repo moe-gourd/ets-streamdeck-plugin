@@ -1,12 +1,17 @@
 #include "pch.h"
 
 #include "ConnectionManager.h"
-#include "WebsocketConnection.h"
+#include "Connection.h"
 #include "ReceivedEvent.h"
 #include "Plugin.h"
 
-ConnectionManager::ConnectionManager()
+ConnectionManager::ConnectionManager() : connection(nullptr)
 {
+}
+
+void ConnectionManager::setConnection(Connection* connection)
+{
+	this->connection = connection;
 }
 
 void ConnectionManager::onMessage(std::string message)
