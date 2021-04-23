@@ -16,7 +16,7 @@ ConnectionManager::ConnectionManager(int argc, const char* const argv[])
 void ConnectionManager::OnMessage(std::string message)
 {
 	ReceivedEvent *event = ReceivedEvent::fromMessage(message);
-	for (std::vector<Plugin*>::const_iterator it = pluginVector.begin(); it != pluginVector.end(); ++it) {
+	for (std::vector<Plugin*>::iterator it = pluginVector.begin(); it != pluginVector.end(); ++it) {
 		event->eventAction(*it);
 	}
 	delete event;
