@@ -10,5 +10,6 @@ private:
 public:
 	Connection(ConnectionManager* connectionManager);
 
+	void sendMessage(std::string message);
 };
 
