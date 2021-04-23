@@ -165,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="CommandlineParser.h" />
     <ClInclude Include="ConnectionManager.h" />
+    <ClInclude Include="ReceivedEvent.h" />
     <ClInclude Include="JSONUtils.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="WebsocketConnection.h" />
@@ -172,6 +173,7 @@
   <ItemGroup>
     <ClCompile Include="CommandlineParser.cpp" />
     <ClCompile Include="ConnectionManager.cpp" />
+    <ClCompile Include="ReceivedEvent.cpp" />
     <ClCompile Include="JSONUtils.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="WebsocketConnection.cpp" />

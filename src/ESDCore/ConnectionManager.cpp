@@ -2,7 +2,7 @@
 
 #include "ConnectionManager.h"
 #include "WebsocketConnection.h"
-#include "JSONUtils.h"
+#include "ReceivedEvent.h"
 
 ConnectionManager::ConnectionManager(int argc, const char* const argv[])
 {
@@ -15,19 +15,5 @@ ConnectionManager::ConnectionManager(int argc, const char* const argv[])
 
 void ConnectionManager::OnMessage(std::string message)
 {
-	try {
-		json jsonMessage = json::parse(message);
-
-		std::string event = JSONUtils::getStringByName(jsonMessage, "event");
-		std::string context = JSONUtils::getStringByName(jsonMessage, "context");
-		std::string action = JSONUtils::getStringByName(jsonMessage, "action");
-		std::string deviceId = JSONUtils::getStringByName(jsonMessage, "device");
-
-		json payload;
-		JSONUtils::getObjectByName(jsonMessage, "payload", payload);
-
-	}
-	catch (...) {
-		DebugPrint("Error during Message parsing\n");
-	}
+	ReceivedEvent *event = ReceivedEvent::fromMessage(message);
 }

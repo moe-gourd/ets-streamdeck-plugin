@@ -30,6 +30,9 @@
     <ClInclude Include="WebsocketConnection.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="ReceivedEvent.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommandlineParser.cpp">
@@ -45,6 +48,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="WebsocketConnection.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="ReceivedEvent.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
