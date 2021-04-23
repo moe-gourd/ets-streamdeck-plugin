@@ -62,11 +62,10 @@ ReceivedEvent * ReceivedEvent::fromMessage(std::string message)
 
 ReceivedEvent::ReceivedEvent(std::string event, json jsonMessage): event(event)
 {
-	std::string context = JSONUtils::getStringByName(jsonMessage, "context");
-	std::string action = JSONUtils::getStringByName(jsonMessage, "action");
-	std::string deviceId = JSONUtils::getStringByName(jsonMessage, "device");
+	context = JSONUtils::getStringByName(jsonMessage, "context");
+	action = JSONUtils::getStringByName(jsonMessage, "action");
+	device = JSONUtils::getStringByName(jsonMessage, "device");
 
-	json payload;
 	JSONUtils::getObjectByName(jsonMessage, "payload", payload);
 }
 

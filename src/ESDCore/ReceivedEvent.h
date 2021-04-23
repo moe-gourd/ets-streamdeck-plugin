@@ -10,6 +10,12 @@ public:
 
 private:
 	std::string event;
+	std::string action;
+	std::string context;
+	std::string device;
+	
+	// json deviceInfo; // deviceDidConnect only
+	json payload;
 
 protected:
 	ReceivedEvent(std::string event, json jsonMessage);
