@@ -1,23 +1,22 @@
 #pragma once
 
-#include <windows.h>
 #include <vector>
-#include "CommandlineParser.h"
+#include <string>
 
-class WebsocketConnection;
+class Connection;
 class Plugin;
 
 class ConnectionManager
 {
 private:
-	WebsocketConnection* websocketConnection;
+	Connection* connection;
 	std::vector<Plugin*> pluginVector;
 
 public:
-	ConnectionManager(int argc, const char* const argv[]);
+	ConnectionManager();
 
+	void setConnection(Connection* connection);
 	void onMessage(std::string message);
 	void addPlugin(Plugin* plugin);
-	void run();
 };
 

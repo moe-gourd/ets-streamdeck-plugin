@@ -1,16 +1,17 @@
 #include "pch.h"
 
 #include "ConnectionManager.h"
-#include "WebsocketConnection.h"
+#include "Connection.h"
 #include "ReceivedEvent.h"
 #include "Plugin.h"
 
-ConnectionManager::ConnectionManager(int argc, const char* const argv[])
+ConnectionManager::ConnectionManager() : connection(nullptr)
 {
-	CommandlineParser commandlineParser(argc, argv);
+}
 
-	websocketConnection = new WebsocketConnection(this);
-	websocketConnection->init(commandlineParser.registerEvent(), commandlineParser.pluginUUID(), commandlineParser.port());
+void ConnectionManager::setConnection(Connection* connection)
+{
+	this->connection = connection;
 }
 
 void ConnectionManager::onMessage(std::string message)
@@ -26,9 +27,4 @@ void ConnectionManager::addPlugin(Plugin* plugin)
 {
 	plugin->setConnectionManager(this);
 	pluginVector.push_back(plugin);
-}
-
-void ConnectionManager::run()
-{
-	websocketConnection->connect();
 }

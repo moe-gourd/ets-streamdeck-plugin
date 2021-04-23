@@ -5,21 +5,20 @@
 #include <websocketpp/common/thread.hpp>
 #include <websocketpp/common/memory.hpp>
 
+#include "Connection.h"
+
 typedef websocketpp::config::asio_client::message_type::ptr message_ptr;
 typedef websocketpp::client<websocketpp::config::asio_client> WebsocketClient;
 
-class ConnectionManager;
-
-class WebsocketConnection
+class WebsocketConnection : public Connection
 {
 private:
 	WebsocketClient webSocketClient;
 	websocketpp::connection_hdl connectionHandle;
 
-	ConnectionManager *connectionManager;
+	// registration data
 	std::string registerEvent;
 	std::string pluginUUID;
-	int port;
 
 	// Websocket callbacks
 	void OnOpen(WebsocketClient* inClient, websocketpp::connection_hdl inConnectionHandler);
@@ -30,7 +29,6 @@ private:
 public:
 	WebsocketConnection(ConnectionManager* connectionManager);
 
-	void init(std::string registerEvent, std::string pluginUUID, int port);
-	void connect();
+	virtual void run(std::string &registerEvent, std::string &pluginUUID, int port) override;
 };
 

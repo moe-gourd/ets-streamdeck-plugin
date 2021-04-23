@@ -3,7 +3,7 @@
 #include "ConnectionManager.h"
 #include "JSONUtils.h"
 
-WebsocketConnection::WebsocketConnection(ConnectionManager* connectionManager):connectionManager(connectionManager)
+WebsocketConnection::WebsocketConnection(ConnectionManager* connectionManager):Connection(connectionManager)
 {
 }
 
@@ -58,19 +58,15 @@ void WebsocketConnection::OnMessage(websocketpp::connection_hdl, WebsocketClient
 		std::string message = inMsg->get_payload();
 		DebugPrint("OnMessage: %s\n", message.c_str());
 
-		connectionManager->onMessage(message);
+		sendMessage(message);
 	}
 }
 
-void WebsocketConnection::init(std::string registerEvent, std::string pluginUUID, int port)
+void WebsocketConnection::run(std::string &registerEvent, std::string &pluginUUID, int port)
 {
 	this->registerEvent = registerEvent;
 	this->pluginUUID = pluginUUID;
-	this->port = port;
-}
 
-void WebsocketConnection::connect()
-{
 	try
 	{
 		// Create the endpoint
