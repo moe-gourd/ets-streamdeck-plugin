@@ -3,10 +3,14 @@
 #include "pch.h"
 #include "JSONUtils.h"
 
+class Plugin;
+
 class ReceivedEvent
 {
 public:
 	static ReceivedEvent * fromMessage(std::string message);
+
+	virtual void eventAction(const Plugin* plugin);
 
 private:
 	std::string event;

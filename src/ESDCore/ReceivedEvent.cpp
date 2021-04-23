@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "ReceivedEvent.h"
 #include "JSONUtils.h"
+#include "Plugin.h"
 
 ReceivedEvent * ReceivedEvent::fromMessage(std::string message)
 {
@@ -67,6 +68,11 @@ ReceivedEvent::ReceivedEvent(std::string event, json jsonMessage): event(event)
 	device = JSONUtils::getStringByName(jsonMessage, "device");
 
 	JSONUtils::getObjectByName(jsonMessage, "payload", payload);
+}
+
+void ReceivedEvent::eventAction(const Plugin* plugin)
+{
+	// fixme
 }
 
 DidReceiveSettingsEvent::DidReceiveSettingsEvent(std::string event, json jsonMessage): ReceivedEvent(event, jsonMessage)
