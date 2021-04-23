@@ -1,9 +1,17 @@
 #pragma once
 #include "JSONUtils.h"
+
+class ConnectionManager;
+
 class Plugin
 {
+protected:
+	const ConnectionManager* connectionManager;
+
 public:
 	Plugin();
+
+	void setConnectionManager(const ConnectionManager* connectionManager);
 
 	virtual void didReceiveSettings(std::string& action, std::string& context, std::string& device, json& payload);
 	virtual void didReceiveGlobalSettings(json& payload);

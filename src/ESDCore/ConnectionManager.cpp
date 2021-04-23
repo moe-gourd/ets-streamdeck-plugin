@@ -3,6 +3,7 @@
 #include "ConnectionManager.h"
 #include "WebsocketConnection.h"
 #include "ReceivedEvent.h"
+#include "Plugin.h"
 
 ConnectionManager::ConnectionManager(int argc, const char* const argv[])
 {
@@ -24,5 +25,6 @@ void ConnectionManager::OnMessage(std::string message)
 
 void ConnectionManager::addPlugin(Plugin* plugin)
 {
+	plugin->setConnectionManager(this);
 	pluginVector.push_back(plugin);
 }

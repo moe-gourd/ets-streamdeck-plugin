@@ -1,8 +1,14 @@
 #include "pch.h"
 #include "Plugin.h"
+#include "ConnectionManager.h"
 
-Plugin::Plugin()
+Plugin::Plugin() : connectionManager(nullptr)
 {
+}
+
+void Plugin::setConnectionManager(const ConnectionManager* connectionManager)
+{
+	this->connectionManager = connectionManager;
 }
 
 void Plugin::didReceiveSettings(std::string& action, std::string& context, std::string& device, json& payload)
