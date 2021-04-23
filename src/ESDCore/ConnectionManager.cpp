@@ -5,12 +5,8 @@
 #include "ReceivedEvent.h"
 #include "Plugin.h"
 
-ConnectionManager::ConnectionManager(int argc, const char* const argv[])
+ConnectionManager::ConnectionManager()
 {
-	CommandlineParser commandlineParser(argc, argv);
-
-	websocketConnection = new WebsocketConnection(this);
-	websocketConnection->run(commandlineParser.registerEvent(), commandlineParser.pluginUUID(), commandlineParser.port());
 }
 
 void ConnectionManager::onMessage(std::string message)

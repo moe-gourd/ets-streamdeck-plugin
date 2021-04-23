@@ -5,5 +5,5 @@
 
 int main(int argc, const char* const argv[])
 {
-    ConnectionManager connectionManager(argc, argv);
+    ConnectionManager *connectionManager = new ConnectionManager();
 }

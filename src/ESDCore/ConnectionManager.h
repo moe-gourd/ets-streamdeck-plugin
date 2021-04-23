@@ -14,10 +14,9 @@ private:
 	std::vector<Plugin*> pluginVector;
 
 public:
-	ConnectionManager(int argc, const char* const argv[]);
+	ConnectionManager();
 
 	void onMessage(std::string message);
 	void addPlugin(Plugin* plugin);
-	void run();
 };
 
