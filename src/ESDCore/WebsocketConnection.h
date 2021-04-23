@@ -10,7 +10,7 @@
 typedef websocketpp::config::asio_client::message_type::ptr message_ptr;
 typedef websocketpp::client<websocketpp::config::asio_client> WebsocketClient;
 
-class WebsocketConnection : Connection
+class WebsocketConnection : public Connection
 {
 private:
 	WebsocketClient webSocketClient;
