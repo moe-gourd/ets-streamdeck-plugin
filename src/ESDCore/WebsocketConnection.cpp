@@ -3,7 +3,7 @@
 #include "ConnectionManager.h"
 #include "JSONUtils.h"
 
-WebsocketConnection::WebsocketConnection(ConnectionManager* connectionManager):Connection(connectionManager)
+WebsocketConnection::WebsocketConnection()
 {
 }
 

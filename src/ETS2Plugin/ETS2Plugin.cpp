@@ -9,12 +9,13 @@
 
 int main(int argc, const char* const argv[])
 {
-    ConnectionManager *connectionManager = new ConnectionManager();
-    Connection *connection = Connection::createWebsocketConnection(connectionManager);
-    connectionManager->setConnection(connection);
+    Connection *connection = Connection::createWebsocketConnection();
+
+    ConnectionManager connectionManager;
+    connectionManager.setConnection(connection);
 
     Plugin* plugin = new Plugin();
-    connectionManager->addPlugin(plugin);
+    connectionManager.addPlugin(plugin);
 
     CommandlineParser commandlineparser(argc, argv);
     std::string registerEvent = commandlineparser.registerEvent();

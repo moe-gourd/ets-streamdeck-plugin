@@ -4,13 +4,17 @@
 #include "ConnectionManager.h"
 #include "WebsocketConnection.h"
 
-Connection* Connection::createWebsocketConnection(ConnectionManager* connectionManager)
+Connection* Connection::createWebsocketConnection()
 {
-	return new WebsocketConnection(connectionManager);
+	return new WebsocketConnection();
 }
 
-Connection::Connection(ConnectionManager* connectionManager):connectionManager(connectionManager)
+Connection::Connection():connectionManager(nullptr)
 {
+}
+
+void Connection::setConnectionManager(ConnectionManager* connectionManager) {
+	this->connectionManager = connectionManager;
 }
 
 void Connection::sendMessage(std::string message)

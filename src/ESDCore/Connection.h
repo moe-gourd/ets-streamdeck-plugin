@@ -8,12 +8,14 @@ private:
 	ConnectionManager* connectionManager;
 
 public:
-	static Connection* createWebsocketConnection(ConnectionManager* connectionManager);
+	static Connection* createWebsocketConnection();
 
-	Connection(ConnectionManager* connectionManager);
+	Connection();
+	void setConnectionManager(ConnectionManager* connectionManager);
+	virtual void run(std::string& registerEvent, std::string& pluginUUID, int port) = 0;
 
+protected:
 	void sendMessage(std::string message);
-
-	virtual void run(std::string &registerEvent, std::string &pluginUUID, int port) = 0;
+	
 };
 

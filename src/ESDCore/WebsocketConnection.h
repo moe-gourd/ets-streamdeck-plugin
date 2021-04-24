@@ -27,7 +27,7 @@ private:
 	void OnMessage(websocketpp::connection_hdl, WebsocketClient::message_ptr inMsg);
 
 public:
-	WebsocketConnection(ConnectionManager* connectionManager);
+	WebsocketConnection();
 
 	virtual void run(std::string &registerEvent, std::string &pluginUUID, int port) override;
 };
