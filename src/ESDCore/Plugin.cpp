@@ -45,22 +45,32 @@ void Plugin::didReceiveGlobalSettings(json& payload)
 
 void Plugin::keyDown(std::string& action, std::string& context, std::string& device, json& payload)
 {
+	PluginAction* pluginAction = getActionFromString(action);
+	pluginAction->keyDown(context, device, payload);
 }
 
 void Plugin::keyUp(std::string& action, std::string& context, std::string& device, json& payload)
 {
+	PluginAction* pluginAction = getActionFromString(action);
+	pluginAction->keyUp(context, device, payload);
 }
 
 void Plugin::willAppear(std::string& action, std::string& context, std::string& device, json& payload)
 {
+	PluginAction* pluginAction = getActionFromString(action);
+	pluginAction->willAppear(context, device, payload);
 }
 
 void Plugin::willDisappear(std::string& action, std::string& context, std::string& device, json& payload)
 {
+	PluginAction* pluginAction = getActionFromString(action);
+	pluginAction->willDisappear(context, device, payload);
 }
 
 void Plugin::titleParametersDidChange(std::string& action, std::string& context, std::string& device, json& payload)
 {
+	PluginAction* pluginAction = getActionFromString(action);
+	pluginAction->titleParametersDidChange(context, device, payload);
 }
 
 void Plugin::deviceDidConnect(std::string& device, json& deviceInfo)
@@ -85,16 +95,24 @@ void Plugin::systemDidWakeUp()
 
 void Plugin::propertyInspectorDidAppear(std::string& action, std::string& context, std::string& device)
 {
+	PluginAction* pluginAction = getActionFromString(action);
+	pluginAction->propertyInspectorDidAppear(context, device);
 }
 
 void Plugin::sendToPlugin(std::string& action, std::string& context, json& payload)
 {
+	PluginAction* pluginAction = getActionFromString(action);
+	pluginAction->sendToPlugin(context, payload);
 }
 
 void Plugin::sendToPropertyInspector(std::string& action, std::string& context, json& payload)
 {
+	PluginAction* pluginAction = getActionFromString(action);
+	pluginAction->sendToPropertyInspector(context, payload);
 }
 
 void Plugin::propertyInspectorDidDisappear(std::string& action, std::string& context, std::string& device)
 {
+	PluginAction* pluginAction = getActionFromString(action);
+	pluginAction->propertyInspectorDidDisappear(context, device);
 }
