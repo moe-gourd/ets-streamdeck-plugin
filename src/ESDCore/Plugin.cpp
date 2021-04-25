@@ -17,19 +17,25 @@ void Plugin::setConnectionManager(const ConnectionManager* connectionManager)
 	this->connectionManager = connectionManager;
 }
 
-void Plugin::didReceiveSettings(std::string& action, std::string& context, std::string& device, json& payload)
+PluginAction* Plugin::getActionFromString(std::string action)
 {
 	if (actionMap.find(action) == actionMap.end()) {
 		DebugPrint("Action %s not listed", action);
-		return;
+		return PluginAction::getNullInstance();
 	}
 
 	PluginAction* pluginAction = actionMap[action];
 	if (nullptr == pluginAction) {
 		DebugPrint("Action %s not null", action);
-		return;
+		return PluginAction::getNullInstance();
 	}
 
+	return pluginAction;
+}
+
+void Plugin::didReceiveSettings(std::string& action, std::string& context, std::string& device, json& payload)
+{
+	PluginAction* pluginAction = getActionFromString(action);
 	pluginAction->didReceiveSettings(context, device, payload);
 }
 

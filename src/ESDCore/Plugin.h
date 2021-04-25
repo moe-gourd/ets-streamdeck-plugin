@@ -16,6 +16,7 @@ public:
 	Plugin();
 
 	void setConnectionManager(const ConnectionManager* connectionManager);
+	PluginAction* getActionFromString(std::string action);
 
 	virtual void didReceiveSettings(std::string& action, std::string& context, std::string& device, json& payload);
 	virtual void didReceiveGlobalSettings(json& payload);
