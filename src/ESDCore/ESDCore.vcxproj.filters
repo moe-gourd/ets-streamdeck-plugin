@@ -42,7 +42,7 @@
     <ClInclude Include="Connection.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Action.h">
+    <ClInclude Include="PluginAction.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
@@ -74,7 +74,7 @@
     <ClCompile Include="Connection.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Action.cpp">
+    <ClCompile Include="PluginAction.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

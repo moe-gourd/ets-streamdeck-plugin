@@ -2,7 +2,7 @@
 
 #include "JSONUtils.h"
 
-class Action
+class PluginAction
 {
 public:
 	virtual void didReceiveSettings(std::string& context, std::string& device, json& payload);
