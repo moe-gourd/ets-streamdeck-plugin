@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Event.h" />
     <ClInclude Include="PluginAction.h" />
     <ClInclude Include="CallbackTimer.h" />
     <ClInclude Include="CommandlineParser.h" />
@@ -175,6 +176,7 @@
     <ClInclude Include="WebsocketConnection.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventsReceived.cpp" />
     <ClCompile Include="PluginAction.cpp" />
     <ClCompile Include="CallbackTimer.cpp" />

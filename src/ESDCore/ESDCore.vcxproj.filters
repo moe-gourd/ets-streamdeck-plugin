@@ -45,6 +45,9 @@
     <ClInclude Include="PluginAction.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommandlineParser.cpp">
@@ -75,6 +78,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="EventsReceived.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
