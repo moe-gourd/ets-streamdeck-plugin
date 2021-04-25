@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Plugin.h"
+#include "PluginAction.h"
 #include "ConnectionManager.h"
 
 void Plugin::addAction(std::string name, PluginAction* action)
@@ -18,6 +19,18 @@ void Plugin::setConnectionManager(const ConnectionManager* connectionManager)
 
 void Plugin::didReceiveSettings(std::string& action, std::string& context, std::string& device, json& payload)
 {
+	if (actionMap.find(action) == actionMap.end()) {
+		DebugPrint("Action %s not listed", action);
+		return;
+	}
+
+	PluginAction* pluginAction = actionMap[action];
+	if (nullptr == pluginAction) {
+		DebugPrint("Action %s not null", action);
+		return;
+	}
+
+	pluginAction->didReceiveSettings(context, device, payload);
 }
 
 void Plugin::didReceiveGlobalSettings(json& payload)

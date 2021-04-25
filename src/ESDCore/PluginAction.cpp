@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Action.h"
+#include "PluginAction.h"
 
 void PluginAction::didReceiveSettings(std::string& context, std::string& device, json& payload)
 {
