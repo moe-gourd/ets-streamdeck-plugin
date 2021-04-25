@@ -164,6 +164,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Event.h" />
+    <ClInclude Include="EventsSent.h" />
     <ClInclude Include="PluginAction.h" />
     <ClInclude Include="CallbackTimer.h" />
     <ClInclude Include="CommandlineParser.h" />
@@ -178,6 +179,7 @@
   <ItemGroup>
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventsReceived.cpp" />
+    <ClCompile Include="EventsSent.cpp" />
     <ClCompile Include="PluginAction.cpp" />
     <ClCompile Include="CallbackTimer.cpp" />
     <ClCompile Include="CommandlineParser.cpp" />
