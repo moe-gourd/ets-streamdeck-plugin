@@ -17,8 +17,11 @@ protected:
 	void addAction(std::string name, PluginAction* action);
 	PluginAction* getActionFromString(std::string action);
 
+	// TODO encapsulate?
 	std::mutex visibleContextMutex;
 	std::set<std::string> visibleContextSet;
+
+	bool isContextVisible(std::string& context);
 
 public:
 	Plugin();

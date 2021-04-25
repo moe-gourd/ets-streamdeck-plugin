@@ -1,6 +1,7 @@
 #include "pch.h"
 
 #include "PluginAction.h"
+#include "Plugin.h"
 
 PluginAction *PluginAction::nullInstance = nullptr;
 
@@ -14,6 +15,11 @@ PluginAction* PluginAction::getNullInstance()
 
 void PluginAction::didReceiveSettings(std::string& context, std::string& device, json& payload)
 {
+}
+
+void PluginAction::setPlugin(Plugin* plugin)
+{
+	this->parentPlugin = plugin;
 }
 
 void PluginAction::keyDown(std::string& context, std::string& device, json& payload)

@@ -5,7 +5,20 @@
 
 void Plugin::addAction(std::string name, PluginAction* action)
 {
-	actionMap[name] = action;
+	if (action != nullptr) {
+		actionMap[name] = action;
+		action->setPlugin(this);
+	}
+
+}
+
+bool Plugin::isContextVisible(std::string& context)
+{
+	bool isVisible = false;
+	visibleContextMutex.lock();
+	isVisible = (visibleContextSet.find(context) != visibleContextSet.end());
+	visibleContextMutex.unlock();
+	return isVisible;
 }
 
 Plugin::Plugin() : connectionManager(nullptr)

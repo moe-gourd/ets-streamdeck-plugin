@@ -2,13 +2,20 @@
 
 #include "JSONUtils.h"
 
+class Plugin;
+
 class PluginAction
 {
 private:
 	static PluginAction* nullInstance;
 
+protected:
+	Plugin* parentPlugin;
+
 public:
 	static PluginAction* getNullInstance();
+
+	virtual void setPlugin(Plugin* plugin);
 
 	virtual void didReceiveSettings(std::string& context, std::string& device, json& payload);
 	virtual void keyDown(std::string& context, std::string& device, json& payload);
