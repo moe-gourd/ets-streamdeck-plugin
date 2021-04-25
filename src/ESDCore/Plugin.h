@@ -2,11 +2,15 @@
 #include "JSONUtils.h"
 
 class ConnectionManager;
+class Action;
 
 class Plugin
 {
 protected:
 	const ConnectionManager* connectionManager;
+	std::unordered_map<std::string, Action*> actionMap;
+
+	void addAction(std::string name, Action* action);
 
 public:
 	Plugin();

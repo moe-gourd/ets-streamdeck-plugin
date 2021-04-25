@@ -42,6 +42,9 @@
     <ClInclude Include="Connection.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommandlineParser.cpp">
@@ -69,6 +72,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Connection.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

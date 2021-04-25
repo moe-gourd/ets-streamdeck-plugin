@@ -2,6 +2,11 @@
 #include "Plugin.h"
 #include "ConnectionManager.h"
 
+void Plugin::addAction(std::string name, Action* action)
+{
+	actionMap[name] = action;
+}
+
 Plugin::Plugin() : connectionManager(nullptr)
 {
 }
