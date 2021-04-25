@@ -4,7 +4,12 @@
 
 class PluginAction
 {
+private:
+	static PluginAction* nullInstance;
+
 public:
+	static PluginAction* getNullInstance();
+
 	virtual void didReceiveSettings(std::string& context, std::string& device, json& payload);
 	virtual void keyDown(std::string& context, std::string& device, json& payload);
 	virtual void keyUp(std::string& context, std::string& device, json& payload);

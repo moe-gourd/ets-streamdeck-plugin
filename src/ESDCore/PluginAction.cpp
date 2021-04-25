@@ -1,5 +1,16 @@
 #include "pch.h"
+
 #include "PluginAction.h"
+
+PluginAction *PluginAction::nullInstance = nullptr;
+
+PluginAction* PluginAction::getNullInstance()
+{
+	if (nullptr == nullInstance) {
+		nullInstance = new PluginAction();
+	}
+	return nullInstance;
+}
 
 void PluginAction::didReceiveSettings(std::string& context, std::string& device, json& payload)
 {
