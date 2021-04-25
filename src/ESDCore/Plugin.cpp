@@ -57,12 +57,20 @@ void Plugin::keyUp(std::string& action, std::string& context, std::string& devic
 
 void Plugin::willAppear(std::string& action, std::string& context, std::string& device, json& payload)
 {
+	visibleContextMutex.lock();
+	visibleContextSet.insert(context);
+	visibleContextMutex.unlock();
+
 	PluginAction* pluginAction = getActionFromString(action);
 	pluginAction->willAppear(context, device, payload);
 }
 
 void Plugin::willDisappear(std::string& action, std::string& context, std::string& device, json& payload)
 {
+	visibleContextMutex.lock();
+	visibleContextSet.erase(context);
+	visibleContextMutex.unlock();
+
 	PluginAction* pluginAction = getActionFromString(action);
 	pluginAction->willDisappear(context, device, payload);
 }
@@ -99,6 +107,12 @@ void Plugin::propertyInspectorDidAppear(std::string& action, std::string& contex
 	pluginAction->propertyInspectorDidAppear(context, device);
 }
 
+void Plugin::propertyInspectorDidDisappear(std::string& action, std::string& context, std::string& device)
+{
+	PluginAction* pluginAction = getActionFromString(action);
+	pluginAction->propertyInspectorDidDisappear(context, device);
+}
+
 void Plugin::sendToPlugin(std::string& action, std::string& context, json& payload)
 {
 	PluginAction* pluginAction = getActionFromString(action);
@@ -109,10 +123,4 @@ void Plugin::sendToPropertyInspector(std::string& action, std::string& context, 
 {
 	PluginAction* pluginAction = getActionFromString(action);
 	pluginAction->sendToPropertyInspector(context, payload);
-}
-
-void Plugin::propertyInspectorDidDisappear(std::string& action, std::string& context, std::string& device)
-{
-	PluginAction* pluginAction = getActionFromString(action);
-	pluginAction->propertyInspectorDidDisappear(context, device);
 }

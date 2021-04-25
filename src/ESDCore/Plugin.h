@@ -1,4 +1,7 @@
 #pragma once
+
+#include <mutex>
+
 #include "JSONUtils.h"
 
 class ConnectionManager;
@@ -8,15 +11,19 @@ class Plugin
 {
 protected:
 	const ConnectionManager* connectionManager;
+
 	std::unordered_map<std::string, PluginAction*> actionMap;
 
 	void addAction(std::string name, PluginAction* action);
+	PluginAction* getActionFromString(std::string action);
+
+	std::mutex visibleContextMutex;
+	std::set<std::string> visibleContextSet;
 
 public:
 	Plugin();
 
 	void setConnectionManager(const ConnectionManager* connectionManager);
-	PluginAction* getActionFromString(std::string action);
 
 	virtual void didReceiveSettings(std::string& action, std::string& context, std::string& device, json& payload);
 	virtual void didReceiveGlobalSettings(json& payload);
