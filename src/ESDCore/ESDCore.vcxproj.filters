@@ -30,7 +30,7 @@
     <ClInclude Include="WebsocketConnection.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="ReceivedEvent.h">
+    <ClInclude Include="EventsReceived.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Plugin.h">
@@ -62,9 +62,6 @@
     <ClCompile Include="WebsocketConnection.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="ReceivedEvent.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Plugin.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -75,6 +72,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="PluginAction.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="EventsReceived.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
