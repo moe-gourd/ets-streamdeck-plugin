@@ -66,11 +66,11 @@ class SwitchToProfileEvent : public SentEvent
 
 class SendToPropertyInspectorEvent : public SentEvent
 {
-
+	// FIXME send & receive
 };
 
 class SendToPluginEvent : public SentEvent
 {
-
+	// FIXME send & receive
 };
 

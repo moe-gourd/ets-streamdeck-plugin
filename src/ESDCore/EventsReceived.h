@@ -117,6 +117,7 @@ public:
 
 class SendToPluginEvent : public ReceivedEvent
 {
+	// FIXME send & receive
 public:
 	SendToPluginEvent(std::string event, json jsonMessage);
 	virtual void eventAction(Plugin* plugin) override;
@@ -124,6 +125,7 @@ public:
 
 class SendToPropertyInspectorEvent : public ReceivedEvent
 {
+	// FIXME send & receive
 public:
 	SendToPropertyInspectorEvent(std::string event, json jsonMessage);
 	virtual void eventAction(Plugin* plugin) override;
