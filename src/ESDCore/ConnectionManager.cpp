@@ -2,7 +2,7 @@
 
 #include "ConnectionManager.h"
 #include "Connection.h"
-#include "ReceivedEvent.h"
+#include "EventsReceived.h"
 #include "Plugin.h"
 
 ConnectionManager::ConnectionManager() : connection(nullptr)

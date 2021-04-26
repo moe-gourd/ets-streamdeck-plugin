@@ -163,25 +163,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="EventsSent.h" />
     <ClInclude Include="PluginAction.h" />
     <ClInclude Include="CallbackTimer.h" />
     <ClInclude Include="CommandlineParser.h" />
     <ClInclude Include="Connection.h" />
     <ClInclude Include="ConnectionManager.h" />
     <ClInclude Include="Plugin.h" />
-    <ClInclude Include="ReceivedEvent.h" />
+    <ClInclude Include="EventsReceived.h" />
     <ClInclude Include="JSONUtils.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="WebsocketConnection.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventsReceived.cpp" />
+    <ClCompile Include="EventsSent.cpp" />
     <ClCompile Include="PluginAction.cpp" />
     <ClCompile Include="CallbackTimer.cpp" />
     <ClCompile Include="CommandlineParser.cpp" />
     <ClCompile Include="Connection.cpp" />
     <ClCompile Include="ConnectionManager.cpp" />
     <ClCompile Include="Plugin.cpp" />
-    <ClCompile Include="ReceivedEvent.cpp" />
     <ClCompile Include="JSONUtils.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="WebsocketConnection.cpp" />

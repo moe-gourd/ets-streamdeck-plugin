@@ -1,6 +1,6 @@
 #include "pch.h"
-#include "ReceivedEvent.h"
-#include "JSONUtils.h"
+
+#include "EventsReceived.h"
 #include "Plugin.h"
 
 ReceivedEvent * ReceivedEvent::fromMessage(std::string message)
@@ -61,7 +61,7 @@ ReceivedEvent * ReceivedEvent::fromMessage(std::string message)
 	return new ReceivedEvent(event, jsonMessage);
 }
 
-ReceivedEvent::ReceivedEvent(std::string event, json jsonMessage): event(event)
+ReceivedEvent::ReceivedEvent(std::string event, json jsonMessage): Event(event)
 {
 	context = JSONUtils::getStringByName(jsonMessage, "context");
 	action = JSONUtils::getStringByName(jsonMessage, "action");

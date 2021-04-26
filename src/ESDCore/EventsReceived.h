@@ -1,11 +1,10 @@
 #pragma once
 
-#include "pch.h"
-#include "JSONUtils.h"
+#include "Event.h"
 
 class Plugin;
 
-class ReceivedEvent
+class ReceivedEvent : public Event
 {
 public:
 	static ReceivedEvent * fromMessage(std::string message);
@@ -13,14 +12,6 @@ public:
 	virtual void eventAction(Plugin* plugin);
 
 protected:
-	std::string event;
-	std::string action;
-	std::string context;
-	std::string device;
-	
-	// json deviceInfo; // deviceDidConnect only
-	json payload;
-
 	ReceivedEvent(std::string event, json jsonMessage);
 };
 
@@ -126,6 +117,7 @@ public:
 
 class SendToPluginEvent : public ReceivedEvent
 {
+	// FIXME send & receive
 public:
 	SendToPluginEvent(std::string event, json jsonMessage);
 	virtual void eventAction(Plugin* plugin) override;
@@ -133,6 +125,7 @@ public:
 
 class SendToPropertyInspectorEvent : public ReceivedEvent
 {
+	// FIXME send & receive
 public:
 	SendToPropertyInspectorEvent(std::string event, json jsonMessage);
 	virtual void eventAction(Plugin* plugin) override;
