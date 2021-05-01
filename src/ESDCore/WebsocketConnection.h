@@ -30,5 +30,6 @@ public:
 	WebsocketConnection();
 
 	virtual void run(std::string &registerEvent, std::string &pluginUUID, int port) override;
+	virtual void sendMessage(std::string& message) override;
 };
 

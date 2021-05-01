@@ -108,3 +108,9 @@ void WebsocketConnection::run(std::string &registerEvent, std::string &pluginUUI
 		DebugPrint("Websocket threw an exception: %s\n", reason);
 	}
 }
+
+void WebsocketConnection::sendMessage(std::string& message)
+{
+	websocketpp::lib::error_code errorCode;
+	webSocketClient.send(connectionHandle, message, websocketpp::frame::opcode::text, errorCode);
+}

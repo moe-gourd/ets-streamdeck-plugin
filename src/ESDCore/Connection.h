@@ -13,9 +13,9 @@ public:
 	Connection();
 	void setConnectionManager(ConnectionManager* connectionManager);
 	virtual void run(std::string& registerEvent, std::string& pluginUUID, int port) = 0;
+	virtual void sendMessage(std::string& message) = 0;
 
 protected:
-	void sendMessage(std::string message);
 	void onMessage(std::string message);
 	
 };

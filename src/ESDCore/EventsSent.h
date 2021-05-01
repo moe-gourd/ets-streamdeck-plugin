@@ -4,6 +4,8 @@
 
 class SentEvent: public Event
 {
+public:
+	std::string dump();
 };
 
 class SetSettingsEvent : public SentEvent
