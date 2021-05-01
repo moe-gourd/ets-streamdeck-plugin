@@ -64,12 +64,12 @@ class SwitchToProfileEvent : public SentEvent
 
 };
 
-class SendToPropertyInspectorEvent : public SentEvent
+class SendToPropertyInspectorSendEvent : public SentEvent
 {
 	// FIXME send & receive
 };
 
-class SendToPluginEvent : public SentEvent
+class SendToPluginSendEvent : public SentEvent
 {
 	// FIXME send & receive
 };
