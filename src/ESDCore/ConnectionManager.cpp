@@ -33,7 +33,7 @@ void ConnectionManager::addPlugin(Plugin* plugin)
 	pluginVector.push_back(plugin);
 }
 
-void ConnectionManager::sendEvent(SentEvent& event)
+void ConnectionManager::sendEvent(SentEvent& event) const
 {
 	if (nullptr == connection) {
 		DebugPrint("unable to send message - no connection\n");

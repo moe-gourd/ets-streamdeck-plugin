@@ -5,6 +5,7 @@
 class SentEvent: public Event
 {
 public:
+	SentEvent(std::string event);
 	std::string dump();
 };
 
@@ -38,6 +39,9 @@ class LogMessageEvent : public SentEvent
 
 class SetTitleEvent : public SentEvent
 {
+public:
+	SetTitleEvent(std::string context);
+	void setTitle(std::string& text, int target = 0, int state = 0);
 
 };
 

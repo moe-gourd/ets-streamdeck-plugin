@@ -19,6 +19,6 @@ public:
 	void setConnection(Connection* connection);
 	void onMessage(std::string message);
 	void addPlugin(Plugin* plugin);
-	void sendEvent(SentEvent& event);
+	void sendEvent(SentEvent& event) const;
 };
 

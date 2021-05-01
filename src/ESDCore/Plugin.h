@@ -7,6 +7,7 @@
 
 class ConnectionManager;
 class PluginAction;
+class SentEvent;
 
 class Plugin
 {
@@ -23,6 +24,7 @@ protected:
 	std::set<std::string> visibleContextSet;
 
 	bool isContextVisible(std::string& context);
+	void sendEvent(SentEvent& event);
 
 public:
 	Plugin();

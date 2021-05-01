@@ -2,6 +2,7 @@
 #include "Plugin.h"
 #include "PluginAction.h"
 #include "ConnectionManager.h"
+#include "EventsSent.h"
 
 void Plugin::addAction(std::string name, PluginAction* action)
 {
@@ -19,6 +20,13 @@ bool Plugin::isContextVisible(std::string& context)
 	isVisible = (visibleContextSet.find(context) != visibleContextSet.end());
 	visibleContextMutex.unlock();
 	return isVisible;
+}
+
+void Plugin::sendEvent(SentEvent& event)
+{
+	if (connectionManager != nullptr) {
+		connectionManager->sendEvent(event);
+	}
 }
 
 Plugin::Plugin() : connectionManager(nullptr)
