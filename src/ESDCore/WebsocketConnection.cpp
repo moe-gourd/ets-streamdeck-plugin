@@ -58,7 +58,7 @@ void WebsocketConnection::OnMessage(websocketpp::connection_hdl, WebsocketClient
 		std::string message = inMsg->get_payload();
 		DebugPrint("OnMessage: %s\n", message.c_str());
 
-		sendMessage(message);
+		Connection::onMessage(message);
 	}
 }
 

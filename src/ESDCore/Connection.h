@@ -16,6 +16,7 @@ public:
 
 protected:
 	void sendMessage(std::string message);
+	void onMessage(std::string message);
 	
 };
 

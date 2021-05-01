@@ -17,7 +17,7 @@ void Connection::setConnectionManager(ConnectionManager* connectionManager) {
 	this->connectionManager = connectionManager;
 }
 
-void Connection::sendMessage(std::string message)
+void Connection::onMessage(std::string message)
 {
 	if (connectionManager != nullptr) {
 		connectionManager->onMessage(message);
