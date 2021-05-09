@@ -14,11 +14,6 @@ class Plugin
 protected:
 	const ConnectionManager* connectionManager;
 
-	std::unordered_map<std::string, PluginAction*> actionMap;
-
-	void addAction(std::string name, PluginAction* action);
-	PluginAction* getActionFromString(std::string action);
-
 	// TODO encapsulate?
 	std::mutex visibleContextMutex;
 	std::set<std::string> visibleContextSet;
