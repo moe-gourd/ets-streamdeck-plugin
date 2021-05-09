@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Plugin.h"
+#include "PluginAction.h"
 #include "ConnectionManager.h"
 #include "EventsSent.h"
 
@@ -103,5 +104,41 @@ void ContextPlugin::willDisappear(std::string& action, std::string& context, std
 {
 	visibleContextMutex.lock();
 	visibleContextSet.erase(context);
+	visibleContextMutex.unlock();
+}
+
+bool ContextActionPlugin::isContextVisible(std::string& context)
+{
+	bool isVisible = false;
+	visibleContextMutex.lock();
+	isVisible = (visibleContextMap.find(context) != visibleContextMap.end());
+	visibleContextMutex.unlock();
+	return isVisible;
+}
+
+void ContextActionPlugin::willAppear(std::string& action, std::string& context, std::string& device, json& payload)
+{
+	PluginAction* pluginAction = nullptr; // TODO: virtual factory function
+
+	visibleContextMutex.lock();
+	if (pluginAction != nullptr) {
+		pluginAction->willAppear(context, device, payload);
+	}
+	visibleContextMap[context] = pluginAction;
+	visibleContextMutex.unlock();
+}
+
+void ContextActionPlugin::willDisappear(std::string& action, std::string& context, std::string& device, json& payload)
+{
+	PluginAction* pluginAction;
+
+	visibleContextMutex.lock();
+	pluginAction = visibleContextMap[context];
+	if (pluginAction != nullptr) {
+		pluginAction->willDisappear(context, device, payload);
+	}
+	delete pluginAction;
+	visibleContextMap[context] = nullptr;
+	visibleContextMap.erase(context);
 	visibleContextMutex.unlock();
 }

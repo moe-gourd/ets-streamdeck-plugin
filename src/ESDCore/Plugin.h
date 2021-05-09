@@ -52,3 +52,15 @@ public:
 	virtual void willAppear(std::string& action, std::string& context, std::string& device, json& payload) override;
 	virtual void willDisappear(std::string& action, std::string& context, std::string& device, json& payload) override;
 };
+
+class ContextActionPlugin : public Plugin
+{
+	std::mutex visibleContextMutex;
+	std::map<std::string, PluginAction*> visibleContextMap;
+
+	bool isContextVisible(std::string& context);
+
+public:
+	virtual void willAppear(std::string& action, std::string& context, std::string& device, json& payload) override;
+	virtual void willDisappear(std::string& action, std::string& context, std::string& device, json& payload) override;
+};
