@@ -14,16 +14,6 @@ class Plugin
 protected:
 	const ConnectionManager* connectionManager;
 
-	std::unordered_map<std::string, PluginAction*> actionMap;
-
-	void addAction(std::string name, PluginAction* action);
-	PluginAction* getActionFromString(std::string action);
-
-	// TODO encapsulate?
-	std::mutex visibleContextMutex;
-	std::set<std::string> visibleContextSet;
-
-	bool isContextVisible(std::string& context);
 	void sendEvent(SentEvent& event);
 
 public:
@@ -49,3 +39,30 @@ public:
 	virtual void sendToPropertyInspector(std::string& action, std::string& context, json& payload);
 };
 
+class ContextPlugin : public Plugin
+{
+protected:
+	// TODO encapsulate?
+	std::mutex visibleContextMutex;
+	std::set<std::string> visibleContextSet;
+
+	bool isContextVisible(std::string& context);
+
+public:
+	virtual void willAppear(std::string& action, std::string& context, std::string& device, json& payload) override;
+	virtual void willDisappear(std::string& action, std::string& context, std::string& device, json& payload) override;
+};
+
+class ContextActionPlugin : public Plugin
+{
+protected:
+	std::mutex visibleContextMutex;
+	std::map<std::string, PluginAction*> visibleContextMap;
+
+	bool isContextVisible(std::string& context);
+	virtual PluginAction* getPluginAction(std::string& action);
+
+public:
+	virtual void willAppear(std::string& action, std::string& context, std::string& device, json& payload) override;
+	virtual void willDisappear(std::string& action, std::string& context, std::string& device, json& payload) override;
+};

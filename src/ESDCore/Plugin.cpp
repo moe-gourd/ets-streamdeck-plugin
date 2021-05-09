@@ -4,24 +4,6 @@
 #include "ConnectionManager.h"
 #include "EventsSent.h"
 
-void Plugin::addAction(std::string name, PluginAction* action)
-{
-	if (action != nullptr) {
-		actionMap[name] = action;
-		action->setPlugin(this);
-	}
-
-}
-
-bool Plugin::isContextVisible(std::string& context)
-{
-	bool isVisible = false;
-	visibleContextMutex.lock();
-	isVisible = (visibleContextSet.find(context) != visibleContextSet.end());
-	visibleContextMutex.unlock();
-	return isVisible;
-}
-
 void Plugin::sendEvent(SentEvent& event)
 {
 	if (connectionManager != nullptr) {
@@ -38,26 +20,8 @@ void Plugin::setConnectionManager(const ConnectionManager* connectionManager)
 	this->connectionManager = connectionManager;
 }
 
-PluginAction* Plugin::getActionFromString(std::string action)
-{
-	if (actionMap.find(action) == actionMap.end()) {
-		DebugPrint("Action %s not listed", action);
-		return PluginAction::getNullInstance();
-	}
-
-	PluginAction* pluginAction = actionMap[action];
-	if (nullptr == pluginAction) {
-		DebugPrint("Action %s not null", action);
-		return PluginAction::getNullInstance();
-	}
-
-	return pluginAction;
-}
-
 void Plugin::didReceiveSettings(std::string& action, std::string& context, std::string& device, json& payload)
 {
-	PluginAction* pluginAction = getActionFromString(action);
-	pluginAction->didReceiveSettings(context, device, payload);
 }
 
 void Plugin::didReceiveGlobalSettings(json& payload)
@@ -66,40 +30,22 @@ void Plugin::didReceiveGlobalSettings(json& payload)
 
 void Plugin::keyDown(std::string& action, std::string& context, std::string& device, json& payload)
 {
-	PluginAction* pluginAction = getActionFromString(action);
-	pluginAction->keyDown(context, device, payload);
 }
 
 void Plugin::keyUp(std::string& action, std::string& context, std::string& device, json& payload)
 {
-	PluginAction* pluginAction = getActionFromString(action);
-	pluginAction->keyUp(context, device, payload);
 }
 
 void Plugin::willAppear(std::string& action, std::string& context, std::string& device, json& payload)
 {
-	visibleContextMutex.lock();
-	visibleContextSet.insert(context);
-	visibleContextMutex.unlock();
-
-	PluginAction* pluginAction = getActionFromString(action);
-	pluginAction->willAppear(context, device, payload);
 }
 
 void Plugin::willDisappear(std::string& action, std::string& context, std::string& device, json& payload)
 {
-	visibleContextMutex.lock();
-	visibleContextSet.erase(context);
-	visibleContextMutex.unlock();
-
-	PluginAction* pluginAction = getActionFromString(action);
-	pluginAction->willDisappear(context, device, payload);
 }
 
 void Plugin::titleParametersDidChange(std::string& action, std::string& context, std::string& device, json& payload)
 {
-	PluginAction* pluginAction = getActionFromString(action);
-	pluginAction->titleParametersDidChange(context, device, payload);
 }
 
 void Plugin::deviceDidConnect(std::string& device, json& deviceInfo)
@@ -124,24 +70,81 @@ void Plugin::systemDidWakeUp()
 
 void Plugin::propertyInspectorDidAppear(std::string& action, std::string& context, std::string& device)
 {
-	PluginAction* pluginAction = getActionFromString(action);
-	pluginAction->propertyInspectorDidAppear(context, device);
 }
 
 void Plugin::propertyInspectorDidDisappear(std::string& action, std::string& context, std::string& device)
 {
-	PluginAction* pluginAction = getActionFromString(action);
-	pluginAction->propertyInspectorDidDisappear(context, device);
 }
 
 void Plugin::sendToPlugin(std::string& action, std::string& context, json& payload)
 {
-	PluginAction* pluginAction = getActionFromString(action);
-	pluginAction->sendToPlugin(context, payload);
 }
 
 void Plugin::sendToPropertyInspector(std::string& action, std::string& context, json& payload)
 {
-	PluginAction* pluginAction = getActionFromString(action);
-	pluginAction->sendToPropertyInspector(context, payload);
+}
+
+bool ContextPlugin::isContextVisible(std::string& context)
+{
+	bool isVisible = false;
+	visibleContextMutex.lock();
+	isVisible = (visibleContextSet.find(context) != visibleContextSet.end());
+	visibleContextMutex.unlock();
+	return isVisible;
+}
+
+void ContextPlugin::willAppear(std::string& action, std::string& context, std::string& device, json& payload)
+{
+	visibleContextMutex.lock();
+	visibleContextSet.insert(context);
+	visibleContextMutex.unlock();
+}
+
+void ContextPlugin::willDisappear(std::string& action, std::string& context, std::string& device, json& payload)
+{
+	visibleContextMutex.lock();
+	visibleContextSet.erase(context);
+	visibleContextMutex.unlock();
+}
+
+bool ContextActionPlugin::isContextVisible(std::string& context)
+{
+	bool isVisible = false;
+	visibleContextMutex.lock();
+	isVisible = (visibleContextMap.find(context) != visibleContextMap.end());
+	visibleContextMutex.unlock();
+	return isVisible;
+}
+
+PluginAction* ContextActionPlugin::getPluginAction(std::string& action)
+{
+	return PluginAction::getNullInstance();
+}
+
+void ContextActionPlugin::willAppear(std::string& action, std::string& context, std::string& device, json& payload)
+{
+	PluginAction* pluginAction = getPluginAction(action);
+	if (pluginAction != nullptr) {
+		pluginAction->willAppear(context, device, payload);
+	}
+
+	visibleContextMutex.lock();
+	visibleContextMap[context] = pluginAction;
+	visibleContextMutex.unlock();
+}
+
+void ContextActionPlugin::willDisappear(std::string& action, std::string& context, std::string& device, json& payload)
+{
+	PluginAction* pluginAction;
+
+	visibleContextMutex.lock();
+	pluginAction = visibleContextMap[context];
+	visibleContextMap[context] = nullptr;
+	visibleContextMap.erase(context);
+	visibleContextMutex.unlock();
+
+	if (pluginAction != nullptr) {
+		pluginAction->willDisappear(context, device, payload);
+	}
+	delete pluginAction;
 }
