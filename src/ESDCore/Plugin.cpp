@@ -3,15 +3,6 @@
 #include "ConnectionManager.h"
 #include "EventsSent.h"
 
-bool Plugin::isContextVisible(std::string& context)
-{
-	bool isVisible = false;
-	visibleContextMutex.lock();
-	isVisible = (visibleContextSet.find(context) != visibleContextSet.end());
-	visibleContextMutex.unlock();
-	return isVisible;
-}
-
 void Plugin::sendEvent(SentEvent& event)
 {
 	if (connectionManager != nullptr) {
@@ -46,16 +37,10 @@ void Plugin::keyUp(std::string& action, std::string& context, std::string& devic
 
 void Plugin::willAppear(std::string& action, std::string& context, std::string& device, json& payload)
 {
-	visibleContextMutex.lock();
-	visibleContextSet.insert(context);
-	visibleContextMutex.unlock();
 }
 
 void Plugin::willDisappear(std::string& action, std::string& context, std::string& device, json& payload)
 {
-	visibleContextMutex.lock();
-	visibleContextSet.erase(context);
-	visibleContextMutex.unlock();
 }
 
 void Plugin::titleParametersDidChange(std::string& action, std::string& context, std::string& device, json& payload)
@@ -96,4 +81,27 @@ void Plugin::sendToPlugin(std::string& action, std::string& context, json& paylo
 
 void Plugin::sendToPropertyInspector(std::string& action, std::string& context, json& payload)
 {
+}
+
+bool ContextPlugin::isContextVisible(std::string& context)
+{
+	bool isVisible = false;
+	visibleContextMutex.lock();
+	isVisible = (visibleContextSet.find(context) != visibleContextSet.end());
+	visibleContextMutex.unlock();
+	return isVisible;
+}
+
+void ContextPlugin::willAppear(std::string& action, std::string& context, std::string& device, json& payload)
+{
+	visibleContextMutex.lock();
+	visibleContextSet.insert(context);
+	visibleContextMutex.unlock();
+}
+
+void ContextPlugin::willDisappear(std::string& action, std::string& context, std::string& device, json& payload)
+{
+	visibleContextMutex.lock();
+	visibleContextSet.erase(context);
+	visibleContextMutex.unlock();
 }

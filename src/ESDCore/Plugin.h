@@ -14,11 +14,6 @@ class Plugin
 protected:
 	const ConnectionManager* connectionManager;
 
-	// TODO encapsulate?
-	std::mutex visibleContextMutex;
-	std::set<std::string> visibleContextSet;
-
-	bool isContextVisible(std::string& context);
 	void sendEvent(SentEvent& event);
 
 public:
@@ -44,3 +39,16 @@ public:
 	virtual void sendToPropertyInspector(std::string& action, std::string& context, json& payload);
 };
 
+class ContextPlugin : public Plugin
+{
+protected:
+	// TODO encapsulate?
+	std::mutex visibleContextMutex;
+	std::set<std::string> visibleContextSet;
+
+	bool isContextVisible(std::string& context);
+
+public:
+	virtual void willAppear(std::string& action, std::string& context, std::string& device, json& payload) override;
+	virtual void willDisappear(std::string& action, std::string& context, std::string& device, json& payload) override;
+};
