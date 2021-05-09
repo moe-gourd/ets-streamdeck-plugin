@@ -116,14 +116,19 @@ bool ContextActionPlugin::isContextVisible(std::string& context)
 	return isVisible;
 }
 
+PluginAction* ContextActionPlugin::getPluginAction(std::string& action)
+{
+	return PluginAction::getNullInstance();
+}
+
 void ContextActionPlugin::willAppear(std::string& action, std::string& context, std::string& device, json& payload)
 {
-	PluginAction* pluginAction = nullptr; // TODO: virtual factory function
-
-	visibleContextMutex.lock();
+	PluginAction* pluginAction = getPluginAction(action);
 	if (pluginAction != nullptr) {
 		pluginAction->willAppear(context, device, payload);
 	}
+
+	visibleContextMutex.lock();
 	visibleContextMap[context] = pluginAction;
 	visibleContextMutex.unlock();
 }
@@ -134,11 +139,12 @@ void ContextActionPlugin::willDisappear(std::string& action, std::string& contex
 
 	visibleContextMutex.lock();
 	pluginAction = visibleContextMap[context];
+	visibleContextMap[context] = nullptr;
+	visibleContextMap.erase(context);
+	visibleContextMutex.unlock();
+
 	if (pluginAction != nullptr) {
 		pluginAction->willDisappear(context, device, payload);
 	}
 	delete pluginAction;
-	visibleContextMap[context] = nullptr;
-	visibleContextMap.erase(context);
-	visibleContextMutex.unlock();
 }

@@ -55,10 +55,12 @@ public:
 
 class ContextActionPlugin : public Plugin
 {
+protected:
 	std::mutex visibleContextMutex;
 	std::map<std::string, PluginAction*> visibleContextMap;
 
 	bool isContextVisible(std::string& context);
+	virtual PluginAction* getPluginAction(std::string& action);
 
 public:
 	virtual void willAppear(std::string& action, std::string& context, std::string& device, json& payload) override;
