@@ -3,7 +3,7 @@
 #include "PluginAction.h"
 #include "Plugin.h"
 
-PluginAction *PluginAction::nullInstance = nullptr;
+PluginAction* PluginAction::nullInstance = nullptr;
 
 PluginAction* PluginAction::getNullInstance()
 {
@@ -55,5 +55,9 @@ void PluginAction::sendToPlugin(std::string& context, json& payload)
 }
 
 void PluginAction::sendToPropertyInspector(std::string& context, json& payload)
+{
+}
+
+void PluginAction::onTimer(std::string& context)
 {
 }

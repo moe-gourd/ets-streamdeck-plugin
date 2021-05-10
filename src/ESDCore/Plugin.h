@@ -55,6 +55,8 @@ protected:
 	std::set<std::string> visibleContextSet;
 
 	bool isContextVisible(std::string& context);
+	virtual void onTimer() override;
+	virtual void onTimer(std::string& context);
 
 public:
 	virtual void willAppear(std::string& action, std::string& context, std::string& device, json& payload) override;
@@ -69,6 +71,7 @@ protected:
 
 	bool isContextVisible(std::string& context);
 	virtual PluginAction* getPluginAction(std::string& action);
+	virtual void onTimer() override;
 
 public:
 	virtual void willAppear(std::string& action, std::string& context, std::string& device, json& payload) override;

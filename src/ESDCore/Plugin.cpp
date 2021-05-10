@@ -111,6 +111,21 @@ bool ContextPlugin::isContextVisible(std::string& context)
 	return isVisible;
 }
 
+void ContextPlugin::onTimer()
+{
+	visibleContextMutex.lock();
+	std::set<std::string>::iterator it;
+	for (it = visibleContextSet.begin(); it != visibleContextSet.end(); it++) {
+		std::string context = *it;
+		onTimer(context);
+	}
+	visibleContextMutex.unlock();
+}
+
+void ContextPlugin::onTimer(std::string& context)
+{
+}
+
 void ContextPlugin::willAppear(std::string& action, std::string& context, std::string& device, json& payload)
 {
 	visibleContextMutex.lock();
@@ -137,6 +152,20 @@ bool ContextActionPlugin::isContextVisible(std::string& context)
 PluginAction* ContextActionPlugin::getPluginAction(std::string& action)
 {
 	return PluginAction::getNullInstance();
+}
+
+void ContextActionPlugin::onTimer()
+{
+	visibleContextMutex.lock();
+	std::map<std::string, PluginAction*>::iterator it;
+	for (it = visibleContextMap.begin(); it != visibleContextMap.end(); it++) {
+		std::string context = it->first;
+		PluginAction* pluginAction = it->second;
+		if (pluginAction != nullptr) {
+			pluginAction->onTimer(context);
+		}
+	}
+	visibleContextMutex.unlock();
 }
 
 void ContextActionPlugin::willAppear(std::string& action, std::string& context, std::string& device, json& payload)

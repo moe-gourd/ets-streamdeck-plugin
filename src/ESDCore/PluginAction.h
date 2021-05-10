@@ -27,5 +27,7 @@ public:
 	virtual void propertyInspectorDidDisappear(std::string& context, std::string& device);
 	virtual void sendToPlugin(std::string& context, json& payload);
 	virtual void sendToPropertyInspector(std::string& context, json& payload);
+
+	virtual void onTimer(std::string& context);
 };
 
