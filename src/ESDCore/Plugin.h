@@ -4,6 +4,7 @@
 #include <set>
 
 #include "JSONUtils.h"
+#include "CallbackTimer.h""
 
 class ConnectionManager;
 class PluginAction;
@@ -11,10 +12,17 @@ class SentEvent;
 
 class Plugin
 {
+private:
+	CallbackTimer callbackTimer;
+
 protected:
 	const ConnectionManager* connectionManager;
 
 	void sendEvent(SentEvent& event);
+
+	void startTimer(int interval);
+	void stopTimer();
+	virtual void onTimer();
 
 public:
 	Plugin();

@@ -11,6 +11,24 @@ void Plugin::sendEvent(SentEvent& event)
 	}
 }
 
+void Plugin::startTimer(int interval)
+{
+	callbackTimer.start(1000, [this]()
+		{
+			this->onTimer();
+		}
+	);
+}
+
+void Plugin::stopTimer()
+{
+	callbackTimer.stop();
+}
+
+void Plugin::onTimer()
+{
+}
+
 Plugin::Plugin() : connectionManager(nullptr)
 {
 }
